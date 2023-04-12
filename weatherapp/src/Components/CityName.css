@@ -1,0 +1,66 @@
+.wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.outerBox{
+    width: 350px;
+    background-color: white;
+}
+.headingDiv{
+    border-bottom: 1px solid  #B5C8D0;
+    margin: 0px;
+    color: #2EB9FA;
+    padding: 20px;
+}
+.heading{
+    margin: 0px;
+    font-size: 20px;
+}
+.InputDiv{
+    margin: 0px;
+    color: #2EB9FA;
+    padding: 20px;
+}
+.Textinput{
+    width: 100%;
+    padding: 0px;
+    text-align: center;
+    height: 40px;
+    border: 1px solid #B5C8D0;
+    border-radius: 4px;
+}
+.OrDiv{
+    margin: 0px;
+    color: #B5C8D0;
+    padding: 0px 20px 0px 20px;
+}
+.OrLine {
+    width: 100%; 
+    text-align: center; 
+    border-bottom: 1px solid #B5C8D0; 
+    line-height: 0.1em;
+    margin: 10px 0 20px; 
+ } 
+ 
+.OrLine span { 
+     background:#fff; 
+     padding:0 10px; 
+ }
+ .SubmitDiv{
+    padding: 10px 20px 20px 20px;
+ }
+ .SubmitButton{
+    width: 100%;
+    padding: 0px;
+    color: white;
+    text-align: center;
+    height: 40px;
+    background-color: #2EB9FA;
+    border: 1px solid #B5C8D0;
+    border-radius: 4px;
+ }
+ .SubmitButton:hover{
+    cursor: pointer;
+ }

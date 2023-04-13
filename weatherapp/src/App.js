@@ -1,20 +1,23 @@
-import './App.css';
-import CityName from './Components/CityName';
-import SearchResult from './Components/SearchResult';
-import { useSelector } from 'react-redux';
+import { useEffect } from "react";
+import "./App.css";
+import CityName from "./Components/CityName";
+import { useSelector } from "react-redux";
+import SearchResult from "./Components/SearchResult";
 
 function App() {
+  useEffect(() => {
+    document.title = "Get Weather";
+  }, []);
 
-  var storeData = useSelector((state) =>{
-    return state.Search
-    })
-const {isSearch} = storeData
+  var searchStoreData = useSelector((state) => {
+    return state.Search;
+  });
 
+  const { searchResult } = searchStoreData;
 
   return (
     <div className="App">
-    {!isSearch && <CityName/>}
-    {isSearch && <SearchResult/>}
+      {Object.keys(searchResult).length === 0 ? <CityName /> : <SearchResult/>}
     </div>
   );
 }

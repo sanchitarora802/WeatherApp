@@ -5,10 +5,16 @@ import { GoLocation } from "react-icons/go";
 import { CiTempHigh } from "react-icons/ci";
 import {WiHumidity} from 'react-icons/wi'
 import basicWeather from "../basicWeather.jpg";
+import { useDispatch } from "react-redux";
+import { updateSearchResult } from "../store/slices/searchSlice";
 
-function SearchResult({setSearch}) {
+function SearchResult() {
+
+  const dispatch = useDispatch();
+
+
     const goBack = () => {
-setSearch(true)
+        dispatch(updateSearchResult({}))
     }
 
   return (
@@ -16,7 +22,7 @@ setSearch(true)
       <div className="outerBox">
         <div className="headingDiv">
           <button className="headingButton">
-            <BiArrowBack />
+            <BiArrowBack onClick={goBack}/>
           </button>
           <h1 className="heading">Weather App</h1>
         </div>
@@ -24,7 +30,6 @@ setSearch(true)
         <div className="WeatherWrap">
           <div className="imagediv">
             <img
-             onClick={goBack}
               className="WeatherImage"
               src={basicWeather}
               alt="Not Available"

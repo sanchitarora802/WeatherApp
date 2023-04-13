@@ -3,26 +3,24 @@ import "./SearchResult.css";
 import { BiArrowBack } from "react-icons/bi";
 import { GoLocation } from "react-icons/go";
 import { CiTempHigh } from "react-icons/ci";
-import {WiHumidity} from 'react-icons/wi'
+import { WiHumidity } from "react-icons/wi";
 import basicWeather from "../basicWeather.jpg";
 import { useDispatch } from "react-redux";
 import { updateSearchResult } from "../store/slices/searchSlice";
 
 function SearchResult() {
-
   const dispatch = useDispatch();
 
-
-    const goBack = () => {
-        dispatch(updateSearchResult({}))
-    }
+  const goBack = () => {
+    dispatch(updateSearchResult({}));
+  };
 
   return (
     <div className="wrap">
       <div className="outerBox">
         <div className="headingDiv">
           <button className="headingButton">
-            <BiArrowBack onClick={goBack}/>
+            <BiArrowBack onClick={goBack} />
           </button>
           <h1 className="heading">Weather App</h1>
         </div>
@@ -52,22 +50,22 @@ function SearchResult() {
               style={{ width: "24px", height: "24px", color: "#2EB9FA" }}
             />
             <div>
-                <h1 className="Temp2">17 C </h1>
-                <h1 className="Temp3">Feels Like</h1>
+              <h1 className="Temp2">17 C </h1>
+              <h1 className="Temp3">Feels Like</h1>
             </div>
           </div>
           <div className="vl"></div>
           <div className="humidity">
-          <WiHumidity
+            <WiHumidity
               style={{ width: "24px", height: "24px", color: "#2EB9FA" }}
             />
             <div>
-                <h1 className="Temp2">84%</h1>
-                <h1 className="Temp3">Humidity</h1>
+              <h1 className="Temp2">84%</h1>
+              <h1 className="Temp3">Humidity</h1>
             </div>
           </div>
-          </div>
         </div>
+      </div>
     </div>
   );
 }

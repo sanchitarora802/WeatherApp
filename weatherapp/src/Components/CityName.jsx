@@ -3,6 +3,7 @@ import "./CityName.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCityName } from "../store/slices/citySlice";
 import { updateSearchResult } from "../store/slices/searchSlice";
+import { toast } from "react-toastify";
 
 function CityName() {
   var lat = "";
@@ -19,40 +20,39 @@ function CityName() {
 
   const getlocation = async () => {
     if (navigator.geolocation) {
-      dispatch(updateCityName(''));
+      dispatch(updateCityName(""));
       const showPosition = async (position) => {
         lat = await position.coords.latitude;
         long = await position.coords.longitude;
-        console.log("lat", lat, "long", long);
+        // console.log("lat", lat, "long", long);
         fetchApiCityKey();
-      }
+      };
       navigator.geolocation.getCurrentPosition(showPosition);
     } else {
-      alert("Sorry! your browser is not supporting");
+      toast.error("Sorry! your browser is not supporting");
     }
   };
 
   const fetchApiCityKey = async (event) => {
-    if(event && event.preventDefault)
-    event.preventDefault();
+    if (event && event.preventDefault) event.preventDefault();
     try {
       const apiKey = "e50afef75fd38ff74b2fc831cda05c1d";
-      if(cityName.length !== 0){
+      if (cityName.length !== 0) {
         url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
-      }
-      else{
+      } else {
         url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}`;
       }
       const res = await fetch(url);
-      if(res.status === 200)
-      {
+      if (res.status === 200) {
         const resJson = await res.json();
         // console.log(resJson)
         dispatch(updateSearchResult(resJson));
         dispatch(updateCityName(""));
+      } else {
+        toast.error("Location Not Found");
       }
     } catch (e) {
-      console.log(e);
+      toast.error("Server Error. Please try Again after some time");
     }
   };
 

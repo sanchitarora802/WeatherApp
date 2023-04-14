@@ -2,7 +2,7 @@ import React from "react";
 import "./CityName.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCityName } from "../store/slices/citySlice";
-import { updateSearchResult } from "../store/slices/searchSlice";
+import { updateSearchLoading, updateSearchResult } from "../store/slices/searchSlice";
 import { toast } from "react-toastify";
 
 function CityName() {
@@ -14,17 +14,24 @@ function CityName() {
     return state.City;
   });
 
+  const searchStoreData = useSelector((state) => {
+    return state.Search;
+  });
+
+  const {searchLoading } = searchStoreData;
   const { cityName } = cityStoreData;
 
   const dispatch = useDispatch();
 
   const getlocation = async () => {
+    dispatch(updateSearchLoading(true))
     if (navigator.geolocation) {
       dispatch(updateCityName(""));
       const showPosition = async (position) => {
         lat = await position.coords.latitude;
         long = await position.coords.longitude;
         // console.log("lat", lat, "long", long);
+        dispatch(updateSearchLoading(false))
         fetchApiCityKey();
       };
       navigator.geolocation.getCurrentPosition(showPosition);
@@ -87,11 +94,15 @@ function CityName() {
             </h4>
           </div>
         </form>
-        <div className="SubmitDiv">
-          <button className="SubmitButton" onClick={getlocation}>
+        <div className="SubmitDiv" searchLoading={searchLoading}>
+          <button disabled={searchLoading} className="SubmitButton" onClick={getlocation}>
             Get Device Location
           </button>
         </div>
+        {searchLoading && 
+      <div className="loadingDiv">
+          <h1 className="loadingText">Click Allow And please Wait while we fetch your location !!</h1>
+      </div>}
       </div>
     </div>
   );

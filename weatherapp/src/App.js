@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import "./App.css";
+
 import CityName from "./Components/CityName";
 import { useSelector } from "react-redux";
 import SearchResult from "./Components/SearchResult";

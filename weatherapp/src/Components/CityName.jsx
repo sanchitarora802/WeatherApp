@@ -75,7 +75,7 @@ function CityName() {
         <div className="headingDiv">
           <h1 className="heading">Weather App</h1>
         </div>
-        <form onSubmit={fetchApiCityKey}>
+         {!searchLoading && <form onSubmit={fetchApiCityKey}>
           <div className="InputDiv">
             <input
               type="text"
@@ -93,10 +93,10 @@ function CityName() {
               <span>or</span>
             </h4>
           </div>
-        </form>
-        <div className="SubmitDiv" searchLoading={searchLoading}>
+        </form>}
+        <div className="SubmitDiv">
           <button disabled={searchLoading} className="SubmitButton" onClick={getlocation}>
-            Get Device Location
+          {searchLoading ? 'Fetching Location...' :'Get Device Location'}
           </button>
         </div>
         {searchLoading && 

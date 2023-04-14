@@ -26,8 +26,8 @@ function SearchResult() {
     <div className="wrap">
       <div className="outerBox">
         <div className="headingDiv">
-          <button className="headingButton">
-            <BiArrowBack onClick={goBack} />
+          <button className="headingButton" onClick={goBack}>
+            <BiArrowBack />
           </button>
           <h1 className="heading">Weather App</h1>
         </div>

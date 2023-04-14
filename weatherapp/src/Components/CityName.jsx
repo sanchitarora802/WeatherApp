@@ -38,9 +38,9 @@ function CityName() {
     try {
       const apiKey = "e50afef75fd38ff74b2fc831cda05c1d";
       if (cityName.length !== 0) {
-        url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
+        url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
       } else {
-        url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}`;
+        url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`;
       }
       const res = await fetch(url);
       if (res.status === 200) {
@@ -78,6 +78,7 @@ function CityName() {
               onChange={handleOnChange}
               value={cityName}
               autoComplete="off"
+              required
             />
           </div>
           <div className="OrDiv">

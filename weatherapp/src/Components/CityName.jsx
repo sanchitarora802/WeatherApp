@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./CityName.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCityName } from "../store/slices/citySlice";
 import { updateSearchLoading, updateSearchResult } from "../store/slices/searchSlice";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function CityName() {
   var lat = "";
   var long = "";
   var url = "";
 
-  const cityStoreData = useSelector((state) => {
+  const navigate = useNavigate();
+
+   const cityStoreData = useSelector((state) => {
     return state.City;
   });
 
@@ -31,7 +34,6 @@ function CityName() {
         lat = await position.coords.latitude;
         long = await position.coords.longitude;
         // console.log("lat", lat, "long", long);
-        dispatch(updateSearchLoading(false))
         fetchApiCityKey();
       };
       navigator.geolocation.getCurrentPosition(showPosition);
@@ -51,23 +53,34 @@ function CityName() {
       }
       const res = await fetch(url);
       if (res.status === 200) {
+        dispatch(updateSearchLoading(false))
         const resJson = await res.json();
         // console.log(resJson)
+        window.localStorage.setItem('ApiRes',JSON.stringify(resJson))
         dispatch(updateSearchResult(resJson));
-        dispatch(updateCityName(""));
+        if(cityName !== '')
+        navigate(`/searchResult/${cityName}`)
+        else
+        navigate(`/searchResult/lat/${lat}/long/${long}`)
       } else {
         toast.error("Location Not Found");
       }
     } catch (e) {
+      console.log(e)
       toast.error("Server Error. Please try Again after some time");
     }
   };
 
-  const handleOnChange = (e) => {
-    if (e.target.name === "cityName") {
+  const handleOnChange = async (e) => {
+    // if (e.target.name === "cityName") {
       dispatch(updateCityName(e.target.value));
-    }
+    // }
   };
+
+   useEffect(()=>{
+     if(cityName !== '')
+    fetchApiCityKey()
+  },[cityName])
 
   return (
     <div className="wrap">
@@ -77,7 +90,7 @@ function CityName() {
         </div>
          {!searchLoading && <form onSubmit={fetchApiCityKey}>
           <div className="InputDiv">
-            <input
+            {/* <input
               type="text"
               className="Textinput"
               name="cityName"
@@ -86,7 +99,14 @@ function CityName() {
               value={cityName}
               autoComplete="off"
               required
-            />
+            /> */}
+            <select  className="Textinput"  onChange={handleOnChange}>
+              <option value="">Select an option</option>
+              <option value='delhi'>Delhi</option>
+              <option value='goa'>goa</option>
+              <option value='chennai'>chennai</option>
+              <option value='Mumbai'>Mumbai</option>
+            </select>
           </div>
           <div className="OrDiv">
             <h4 className="OrLine">

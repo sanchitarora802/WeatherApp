@@ -13,10 +13,13 @@ import { updateCityName } from "../store/slices/citySlice";
 function SearchResult() {
 
   useEffect(()=>{
-    const Res = window.localStorage.getItem('ApiRes')
-    //console.log('res',JSON.parse(Res))
-    if(Res !== '')
-    dispatch(updateSearchResult(JSON.parse(Res)))
+    if(window)
+    {
+      const Res = window.localStorage.getItem('ApiRes')
+      //console.log('res',JSON.parse(Res))
+      if(Res !== '')
+      dispatch(updateSearchResult(JSON.parse(Res)))
+    }
   },[])
 
   const dispatch = useDispatch();

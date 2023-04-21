@@ -14,7 +14,7 @@ function SearchResult() {
 
   useEffect(()=>{
     const Res = window.localStorage.getItem('ApiRes')
-    console.log('res',JSON.parse(Res))
+    //console.log('res',JSON.parse(Res))
     if(Res !== '')
     dispatch(updateSearchResult(JSON.parse(Res)))
   },[])
@@ -87,9 +87,7 @@ function SearchResult() {
         </div>
       </div>
     </div>
-    // <>
-    //   hello
-    // </>
+
   );
 }
 
